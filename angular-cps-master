@@ -1,0 +1,143 @@
+mport { Component } from '@angular/core';
+import * as xlsx from 'xlsx';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  title = 'angular-cps';
+
+  oee = {
+    area_id: "5d09eab77ebc080da02fe9f5",
+    area_name: "DRY",
+    flagSelection: "Waterfall Report",
+    from_time: "2021-04-01 06:15:29",
+    level1ReasonId: undefined,
+    level2ReasonId: undefined,
+    login_sessionId: "etUIjwIsLeKhs4GxRksLgz-YppT0U4cA",
+    oee_analysis_chart_type: undefined,
+    oee_analysis_details: undefined,
+    period: "date",
+    plant_id: "5e815c3823aba31918356ac8",
+    plant_name: "EGS Test",
+    pos: undefined,
+    prod_by_entity_show_critreia: undefined,
+    recipes: undefined,
+    region_id: "5e815bf923aba31918356ac7",
+    region_name: "Europe",
+    shift_id: ["5e815cb923aba31918356ac9", "5e92aa91c03799139d98342e"],
+    shift_name_utilization: ["L First", "L Second"],
+    showDetails: undefined,
+    to_time: "2021-04-27 06:15:46",
+    utilization_report_event: undefined,
+    workcenter_id: "5e85c86546dcde37b4fefa96",
+    workcenter_name: "Midi P1 420",
+  }
+
+  oeeDataArray = {
+    FromTime: "2021-04-01T06:15:29.000Z",
+    OEEOne: {
+      Iruntime: "8405.53",
+      NSTRruntime: "158.22",
+      OEE1: "0.25",
+      SCruntime: "19720.65",
+      SSruntime: "2838.80",
+      Sruntime: "43580.10",
+      TotalRunTime: "170.28",
+      offlineTime: 0,
+      plossInminutes: "77",
+      qlossInminutes: "0",
+      totalAvailableTime: 37440,
+      totalTime: 37440
+    },
+    OEETwo: {
+      Iruntime: "3525.93",
+      NSTRruntime: {NSTRruntime: "132.00", level2Report: Array(9)},
+      OEE2: "0.43",
+      SCruntime: {SCruntime: "11955.76", level2Report: Array(9)},
+      SSruntime: {SSruntime: "1857.89", level2Report: Array(9)},
+      Sruntime: {Sruntime: "24602.93", level2Report: Array(9)},
+      TotalRunTime: "165.48",
+      offlineTime: 16320,
+      plossInminutes: {plossInminutes: 76, level2Report: Array(2)},
+      qlossInminutes: {qlossInminutes: 0, level2Report: Array(5)},
+      totalAvailableTime: 20988,
+      totalTime: 37440,
+    },
+    ToTime: "2021-04-27T06:15:46.000Z",
+  }
+ 
+   t1: (string | number)[][];
+
+
+  
+
+    // Prepare excel table here
+    
+      
+      constructor() {
+      
+    
+     this.t1=[
+    
+    ['Iruntime' , 3525.93],
+    ["NSTRruntime", 132.00],
+    ["OEE2", 0.43],
+    ["SCruntime",11955.76],
+    ["SSruntime" ,1857.89],
+    ["Sruntime",24602.93],
+    ["TotalRunTime" ,165.48],
+    ["offlineTime", 16320],
+    ["plossInminutes", 76],
+    ["qlossInminutes", 0],
+    ["totalAvailableTime",20988],
+    ["totalTime",37440]
+    
+    ];
+   
+  }
+    
+    
+  downloadReport(){
+    console.log("Download Report");
+    console.log("OEE: ", this.oee);
+    console.log("OEE Array: ", this.oeeDataArray);
+
+    
+    // Use JSON TO SHEET function from XLSX
+   
+    
+    const fileName = 'OEE Waterfall Report .xlsx' ;
+    const ws: xlsx.WorkSheet = xlsx.utils.json_to_sheet(this.t1);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Summary');
+    xlsx.writeFile(wb, fileName);
+    } 
+  
+  
+
+    // Create Workbook
+   
+
+  }
+    // Save Excel file here
+    
+    // var file = new File(["Hello, world!"], "OEE Waterfall Report .xlsx", {type: ".xlsx"});
+    //  FileSaver.saveAs(file);
+    
+
+ 
+
+
+
+function ExportTOExcel() {
+  throw new Error('Function not implemented.');
+}
+
+
+function t1(t1: any): xlsx.WorkSheet {
+  throw new Error('Function not implemented.');
+}
+
